@@ -41,11 +41,11 @@ class ListingsController < ApplicationController
   # PATCH/PUT /listings/1.json
   def update
     respond_to do |format|
-      if #@listing.update(listing_params)
+      if @listing.update(listing_params)
         format.html { redirect_to @listing, notice: 'Listing was successfully updated.' }
-        format.json { render :show, status: :ok, location: @listing }
+        format.json { head :no_content }
       else
-        format.html { render :edit }
+        format.html { render action: 'edit' }
         format.json { render json: @listing.errors, status: :unprocessable_entity }
       end
     end
@@ -61,7 +61,7 @@ class ListingsController < ApplicationController
     end
   end
 
-  private
+ private
     # Use callbacks to share common setup or constraints between actions.
     def set_listing
       @listing = Listing.find(params[:id])
